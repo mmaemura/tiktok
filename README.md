@@ -1,6 +1,8 @@
 # TikTok Project Proposal 
 Kelly Chen
+
 Emma Bradley
+
 Matthew Maemura
 
 ### Abstract
