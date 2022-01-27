@@ -14,4 +14,3 @@ We will use an Unofficial TikTok API linked here. From there, we will create a d
 
 ### Tools and Skills Required
 First, to collect data, the API must be installed, and then we will be able to use our Python skills to navigate the dictionaries to collect the data. Next, we will need to learn to build a data set from which we will further develop our understanding of sentiment analysis. Our analysis will consist of visualizations and will be presented as a blog post, using thorough and professional chart-making skills.
-
