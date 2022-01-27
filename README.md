@@ -29,6 +29,7 @@ A limitation with our analysis may be that the sentiment of TikTok’s is dictat
 
 ### Ethics
 As mentioned in the resource section, our use of audio transcription can have trouble with accents, potentially excluding minority groups as demonstrated in this TikTok. Even though TikTok has included the option of autotranscribing videos for the visually impaired, this technology is imperfect. Another factor to consider is the TikTok For You page and how the algorithm determines which TikToks to show its users. While more popular creators on the app tend to be white, this may cause bias that promotes white creators over others. 
+
 The potential benefit of this project is producing research that shows the typical sentiment displayed from TikTok content. The users and the app developers can recognize the the type of content they promote on the app. While TikTok has posting restrictions on inappropriate or offensive content, this app is known to be addictive, taking a toll on emotional health. While the results of project may point to less use of TikTok, the app would not be substantially harmed from less screen time. Taking control of emotional health leads to better overall health. Promoting better uses of social media can also contribute to improving society. 
 
 ### Tentative Timeline
