@@ -52,14 +52,16 @@ def download_mp3(id, url):
 
 def get_audio_transcription(id):
     py_file_path = os.path.dirname(os.path.realpath(__file__))
-    wav_folder = r'\wav_files'
-    mp3_folder = r'\mp3_files'
-    mp3_file = f'\\{id}.mp3'
-    wav_file = f'\\{id}.wav'
+    wav_folder = r'\wav_files\\'
+    mp3_folder = r'\mp3_files\\'
+    mp3_file = f'{id}.mp3'
+    wav_file = f'{id}.wav'
 
     mp3_file_path = py_file_path + mp3_folder + mp3_file
     wav_file_path = py_file_path + wav_folder + wav_file
+
     print("file path is: ", mp3_file_path)
+
     audio = AudioSegment.from_mp3(mp3_file_path)
     audio.export(wav_file_path, format = "wav")
 
