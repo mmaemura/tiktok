@@ -8,6 +8,7 @@ from pydub import AudioSegment
 import speech_recognition as sr
 import os
 import sqlite3
+import shutil
 
 
 ##to run
@@ -65,6 +66,9 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
         if i % 10 == 0:
             print(i)
 
+    delete_audio_folder(mp3_folder)
+    delete_audio_folder(wav_folder)
+
     if to_db:
         df.to_sql("tiktok", conn, if_exists = "append", index = False)
 
@@ -82,7 +86,7 @@ def mp3_to_wav(mp3_path, wav_path):
         audio = AudioSegment.from_mp3(mp3_path)
         audio.export(wav_path, format = "wav")
     except Exception as e:
-        print(e)
+        print("encountered wav conversion error")
     
 
 def get_audio_transcription(wav_path):
@@ -101,4 +105,19 @@ def get_audio_transcription(wav_path):
     else:
         return "NA"
 
+def delete_audio_folder(folder):
+    for filename in os.listdir(folder):
+        file_path = os.path.join(folder, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print('Failed to delete %s. Reason: %s' % (file_path, e))
+
+
+
+
 get_tiktok_data(k = 100, get_transcription = True, to_db = True, to_csv = False)
+
