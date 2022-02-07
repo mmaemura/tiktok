@@ -14,7 +14,7 @@ import shutil
 ##to run
 ##in C: ... \tiktok
 ##virtualenv env
-##cd env/Scripts
+##cd env\Scripts
 ##activate
 ##cd ..
 ##cd ..
@@ -27,7 +27,10 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
 
     tiktoks = api.by_trending(count = k)
 
-
+    py_file_path = os.path.dirname(os.path.realpath(__file__)) #full path to directory of this python file
+    mp3_folder = r'/mp3_files/'
+    wav_folder = '\wav_files\\'
+    
     #time.sleep(1) to wait a sec
 
     conn = sqlite3.connect("tiktok.db")
@@ -46,13 +49,9 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
 
         if get_transcription:
             id = video[0]
-            py_file_path = os.path.dirname(os.path.realpath(__file__)) #full path to directory of this python file
-            mp3_folder = r'/mp3_files/'
             mp3_file = f'{id}.mp3'
-            mp3_path = py_file_path + mp3_folder + mp3_file
-
-            wav_folder = '\wav_files\\'
             wav_file = f'{id}.wav'
+            mp3_path = py_file_path + mp3_folder + mp3_file
             wav_path = py_file_path + wav_folder + wav_file
 
             download_mp3(mp3_path, url = sound[4])
@@ -66,8 +65,8 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
         if i % 10 == 0:
             print(i)
 
-    delete_audio_folder(mp3_folder)
-    delete_audio_folder(wav_folder)
+    delete_audio_folder(py_file_path + mp3_folder)
+    delete_audio_folder(py_file_path + wav_folder)
 
     if to_db:
         df.to_sql("tiktok", conn, if_exists = "append", index = False)
