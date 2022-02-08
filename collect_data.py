@@ -70,6 +70,8 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
 
     if to_db:
         df.to_sql("tiktok", conn, if_exists = "append", index = False)
+    
+    conn.close()
 
     if to_csv:
         return df.to_csv("{date[0]}.csv")
