@@ -64,9 +64,9 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
         i += 1
         if i % 10 == 0:
             print(i)
-
-    delete_audio_folder(py_file_path + mp3_folder)
-    delete_audio_folder(py_file_path + wav_folder)
+    if get_transcription:
+        delete_audio_folder(py_file_path + mp3_folder)
+        delete_audio_folder(py_file_path + wav_folder)
 
     if to_db:
         df.to_sql("tiktok", conn, if_exists = "append", index = False)
@@ -118,7 +118,4 @@ def delete_audio_folder(folder):
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 
-
-
-get_tiktok_data(k = 100, get_transcription = True, to_db = True, to_csv = False)
 
