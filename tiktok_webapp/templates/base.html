@@ -1,0 +1,24 @@
+<!doctype html>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %} - TikTok Webapp</title>
+<nav>
+  <h1>Check Sentiments of Trending TikToks!</h1>
+  <td>Click below to query current trending TikToks and analyze their sentiments</td>
+  <br>
+  <!-- <b>Navigation:</b> -->
+  <ul>
+    <li><a href="{{ url_for('submit') }}">Go now!</a></li>
+  </ul>
+  <br>
+  <br>
+  <iframe src="https://giphy.com/embed/U3rive8V39QioDjmNF" width="240" height="240" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/tiktok-tik-tok-brasil-U3rive8V39QioDjmNF">via GIPHY</a></p>
+
+</nav>
+
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% block content %}{% endblock %}
+</section>
