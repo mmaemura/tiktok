@@ -18,9 +18,9 @@ import shutil
 ##activate
 ##cd ..
 ##cd ..
-##python collect_data.py
+##python run_query.py
 
-def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = False):
+def get_tiktok_data(k = 1, get_transcription = False, to_db = False, db_file_name = "tiktok.db", to_csv = False):
     verifyFp = "verify_5ac3d7e61b6197794299a7ffda73bc33"
 
     api = TikTokApi.get_instance(custom_verifyFp=verifyFp, use_test_endpoints=True)
@@ -33,7 +33,7 @@ def get_tiktok_data(k = 1, get_transcription = False, to_db = False, to_csv = Fa
     
     #time.sleep(1) to wait a sec
 
-    conn = sqlite3.connect("tiktok.db")
+    conn = sqlite3.connect(db_file_name)
 
     columns = ["date_pulled","id", "video_title", "video_url", 'upload_time',"creator", "creator_nickname", "creator_id", "creator_verified", "like", "share", "comment", "view", "original_item", "sound_id", "sound_title", "sound_author", "sound_orignal", "sound_url", "sound_transcribed"]
     df = pd.DataFrame(columns = columns)
