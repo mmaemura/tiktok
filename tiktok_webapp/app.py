@@ -41,7 +41,7 @@ def plot_sentiments(days):
 
 @app.route("/")
 def main():
-    return render_template('base.html')
+    return render_template('submit.html')
     
 # getting messages
 @app.route('/submit/', methods=['GET'])
