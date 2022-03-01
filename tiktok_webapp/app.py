@@ -79,8 +79,8 @@ def submit():
 
 @app.route('/view/')
 def view():
-    plot_sentiments(10)
-    return render_template('view.html')
+    plot = plot_sentiments(10)
+    return render_template('view.html', plot = plot)
 
     
 
