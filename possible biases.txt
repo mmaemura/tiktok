@@ -1,0 +1,6 @@
+What biases are in the data?
+  all of the tiktoks are 'trending'. Are trending tiktoks sexist or racist?
+
+
+What biases exist from modeling choices?
+  using vader: doesn't ackowledge foreign languages
