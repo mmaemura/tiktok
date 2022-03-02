@@ -1,4 +1,4 @@
-
+{% extends 'base.html' %}
 {% block header %}
   <h1>{% block title %}♫ Current Trending TikTok Sentiments ♪{% endblock %}</h1>
 {% endblock %}
@@ -12,6 +12,7 @@
   </form>
 {% if thanks %}
   <b>Ok, so you would like to query tik toks from the past {{num_days}} days?</b>
+  Click <a href="/view/">here</a> to go to a customized page just for you!
 {% endif %}
 
 {% if error %}

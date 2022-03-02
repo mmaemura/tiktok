@@ -72,7 +72,7 @@ def plot_sentiments(days):
     plot = plt.pie(dict_data.values(), labels=dict_data.keys())
     #plt.show()
 
-    plt.savefig('/static/images/new_plot.png')
+    plt.savefig('new_plot.png')
 
     return plot
 
@@ -91,10 +91,14 @@ def submit():
             return render_template('submit.html', error=True)
 
 
-#@app.route('/view/')
-#def view():
-    #fig = plot_sentiments(10)
-    #return render_template('view.html', name = 'new_plot', url ='/static/images/new_plot.png')
+@app.route('/view/')
+def view():
+    fig = plot_sentiments(10)
+    return render_template('view.html', name = 'new_plot', url ='new_plot.png')
+
+@app.route('/about_us/')
+def about_us():
+    return render_template('about_us.html')
     
 
     

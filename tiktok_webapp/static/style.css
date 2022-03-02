@@ -32,20 +32,28 @@ nav {
     padding: 0 0.5rem;
     border-radius: 25px;
     text-align: center;
-    margin: 0 auto;
-
 }
 
 nav ul  {
-    display: inline-block;
+    display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 nav ul li a {
     display: block;
     padding: 0.5rem;
+    text-align: center;
+}
+
+.content2 {
+    padding: 0 1rem 1rem;
+    background: rgb(231, 64, 92);
+    color: white;
+    border-radius: 25px;
+    text-align: center;
 }
 
 .content {
