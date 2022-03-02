@@ -16,6 +16,12 @@ from nltk.sentiment.util import *
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import collections
 
+import io
+import random
+
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.figure import Figure
+
 from flask import Flask, render_template, request, g
 app = Flask(__name__)
 
@@ -66,21 +72,30 @@ def plot_sentiments(days):
     plot = plt.pie(dict_data.values(), labels=dict_data.keys())
     #plt.show()
 
+    plt.savefig('/static/images/new_plot.png')
+
     return plot
 
 @app.route("/")
 def main():
     return render_template('base.html')
     
-@app.route('/submit/', methods=['GET'])
+@app.route('/submit/', methods=['GET', 'POST'])
 def submit():
     if request.method == 'GET':
         return render_template('submit.html')
+    else:
+        try:
+            return render_template('submit.html', thanks=True, num_days=request.form['num_days'])
+        except:
+            return render_template('submit.html', error=True)
 
-@app.route('/view/')
-def view():
-    plot = plot_sentiments(10)
-    return render_template('view.html', plot = plot)
+
+#@app.route('/view/')
+#def view():
+    #fig = plot_sentiments(10)
+    #return render_template('view.html', name = 'new_plot', url ='/static/images/new_plot.png')
+    
 
     
 
