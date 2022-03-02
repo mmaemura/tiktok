@@ -3,4 +3,5 @@ What biases are in the data?
 
 
 What biases exist from modeling choices?
-  using vader: doesn't ackowledge foreign languages
+  using vader: doesn't ackowledge foreign languages, how was it trained?
+  using Google sound transcriber: how was it trained?
