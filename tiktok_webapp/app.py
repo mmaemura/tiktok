@@ -69,12 +69,10 @@ def plot_sentiments(days):
 
     dict_data = dict_ss.copy()
     #dict_data.pop('compound')
-    plot = plt.pie(dict_data.values(), labels=dict_data.keys())
+    plt.pie(dict_data.values(), labels=dict_data.keys())
     #plt.show()
 
-    plt.savefig('new_plot.png')
-
-    return plot
+    return plt
 
 @app.route("/")
 def main():
@@ -94,7 +92,8 @@ def submit():
 @app.route('/view/')
 def view():
     fig = plot_sentiments(10)
-    return render_template('view.html', name = 'new_plot', url ='new_plot.png')
+    #fig.savefig('/static/new_plot.png')
+    return render_template('view.html', name = 'new_plot', url ='/static/Unknown.png')
 
 @app.route('/about_us/')
 def about_us():
