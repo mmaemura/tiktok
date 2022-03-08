@@ -73,8 +73,9 @@ def clean_tiktok_df(tiktoks):
     return tiktoks
 
 def get_tiktok_db():
-    g.tiktok_db = sqlite3.connect("tiktok.db")
-    g.tiktok_db.execute('''CREATE TABLE IF NOT EXISTS tiktok(id INTEGER, video_title TEXT, sound_transcribed TEXT, upload_time TEXT, view INTEGER, date_pulled TEXT, like INTEGER)''')
+    if 'tiktok_db' not in g:
+        g.tiktok_db = sqlite3.connect("tiktok.db")
+    #g.tiktok_db.execute('''CREATE TABLE IF NOT EXISTS tiktok(id INTEGER, video_title TEXT, sound_transcribed TEXT, upload_time TEXT, view INTEGER, date_pulled TEXT, like INTEGER)''')
     return g.tiktok_db
 
 def plot_sentiments(days):
@@ -122,23 +123,24 @@ def plot_sentiments(days):
     return plt
 
 def plot_sentiments2(num_days):
-    #g.tiktok_db = get_tiktok_db()
-    conn = sqlite3.connect("tiktok.db")
+    g.tiktok_db = get_tiktok_db()
+    #conn = sqlite3.connect("tiktok.db")
     cmd = \
     f"""
     SELECT id, video_title, upload_time, sound_transcribed, like, view
     FROM tiktok 
     """ 
-    #tiktoks = pd.read_sql_query(cmd, g.tiktok_db)
-    tiktoks = pd.read_sql_query(cmd, conn)
+    tiktoks = pd.read_sql_query(cmd, g.tiktok_db)
+    #tiktoks = pd.read_sql_query(cmd, conn)
 
     # close database
-    #g.tiktok_db.close()
-    conn.close()
+    g.tiktok_db.close()
+    #conn.close()
     tiktoks = clean_tiktok_df(tiktoks)
     tiktoks = get_sentiment(tiktoks)
 
     fig = plotsentiments2(tiktoks)
+    print(tiktoks['view'])
     return fig
 
 
@@ -151,8 +153,8 @@ def submit():
     if request.method == 'GET':
         return render_template('submit.html')
     else:
-        if request.form.get('action1') == 'go now!':
-            return render_template('submit.html', thanks=True, num_days=request.form['num_days'])
+        #if request.form.get('action1') == 'go now!':
+        return render_template('submit.html', thanks=True, num_days=request.form['num_days'])
 
 
 @app.route('/view/')

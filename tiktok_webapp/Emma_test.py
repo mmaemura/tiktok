@@ -27,6 +27,8 @@ from nltk.sentiment import SentimentAnalyzer
 from nltk.sentiment.util import *
 
 
+
+
 def clean_tiktok_df(tiktoks):
     
     #fix column 'upload_time' -> 'video_url'
@@ -44,6 +46,7 @@ def clean_tiktok_df(tiktoks):
     tiktoks["sound_transcribed"] = [sound if sound != 'NA' else '' for sound in tiktoks["sound_transcribed"]]
     tiktoks = tiktoks.reset_index(drop = True)
     
+    #sid = SentimentIntensityAnalyzer()
     #replace hashtag phrase with predicted phrase with spaces added
     tiktoks['hashtags'] = [re.findall(r"#(\w+)",x) for x in tiktoks['video_title'] ] #create col for list of hashtag phrases
     tiktoks['predicted_hashtag_words'] = [segment(' '.join(x)) for x in tiktoks['hashtags']] #create col for list of predicted phrases of each hashtag
@@ -56,6 +59,7 @@ def clean_tiktok_df(tiktoks):
 
 
 def get_sentiment(tiktoks):
+    sid = SentimentIntensityAnalyzer()
     #combine title and sound_transcribed
     tiktoks['title_and_sound'] = tiktoks['video_title'].astype(str) + ' ' + tiktoks['sound_transcribed'].astype(str)
 
