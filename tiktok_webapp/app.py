@@ -118,9 +118,6 @@ def submit1():
         fig1 = plot_sentiments2(num_days)
         graphJSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
 
-        # pie chart
-        #fig2 = app_piechart(num_days)
-        #graphJSON2 = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
         return render_template('view1.html', graphJSON=graphJSON)
 
 @app.route('/submit2/', methods=['GET', 'POST'])
