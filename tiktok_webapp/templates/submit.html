@@ -1,23 +1,20 @@
 {% extends 'base.html' %}
 {% block header %}
-  <h1>{% block title %}♫ Current Trending TikTok Sentiments ♪{% endblock %}</h1>
+  <h1>{% block title %}♫ Viewing Trending TikTok Sentiments ♪{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
   <form method="POST">
-    <label for="num_days">Number of previous days you would like to query:</label>
+    <label for="num_days">How many days worth of trending TikToks would you like to analyze?</label>
     <br>
     <input type="text" name="num_days" id="num_days">
     <br>
-    <input type="submit" value="go now!" name="action1" href="/view/"/>
-    <br>
+    <input type="submit" value="go now!" name="action1">
   </form>
 {% if thanks %}
+
   <b>Ok, so you would like to query tik toks from the past {{num_days}} days?</b>
   Click <a href="/view/">here</a> to go to a customized page just for you!
 {% endif %}
 
-{% if error %}
-  looks like something went wrong
-{% endif %}
 {% endblock %}

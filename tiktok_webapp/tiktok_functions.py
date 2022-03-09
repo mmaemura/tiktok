@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[23]:
-
 
 import sqlite3
 import pandas as pd
@@ -26,9 +24,6 @@ from nltk.corpus import subjectivity
 from nltk.sentiment import SentimentAnalyzer
 from nltk.sentiment.util import *
 
-
-
-
 def clean_tiktok_df(tiktoks):
     
     #fix column 'upload_time' -> 'video_url'
@@ -46,7 +41,6 @@ def clean_tiktok_df(tiktoks):
     tiktoks["sound_transcribed"] = [sound if sound != 'NA' else '' for sound in tiktoks["sound_transcribed"]]
     tiktoks = tiktoks.reset_index(drop = True)
     
-    #sid = SentimentIntensityAnalyzer()
     #replace hashtag phrase with predicted phrase with spaces added
     tiktoks['hashtags'] = [re.findall(r"#(\w+)",x) for x in tiktoks['video_title'] ] #create col for list of hashtag phrases
     tiktoks['predicted_hashtag_words'] = [segment(' '.join(x)) for x in tiktoks['hashtags']] #create col for list of predicted phrases of each hashtag
@@ -97,18 +91,6 @@ def plotsentiments2(tiktoks):
             'x':0.1
         })
 
-    ## Add video links to points
-    # plotAnnotes = []
-    # for i in np.arange(tiktoks.shape[0]):
-    #     plotAnnotes.append(dict(x = tiktoks['Positive Sentiment'][i],
-    #                             y = tiktoks['Negative Sentiment'][i],
-    #                             text = """<a href="{}">{}</a>""".format(tiktoks['video_url'][i]," "),
-    #                             showarrow = False,
-    #                             xanchor = 'center',
-    #                             yanchor = 'bottom'))
-    #fig.update_layout(annotations = plotAnnotes)
-
-    #fig.show()
     return fig
 
 
