@@ -101,6 +101,39 @@ def plotsentiments2(tiktoks):
 
     return fig
 
+def sent_scores(tiktoks):
+    ss = [SentimentIntensityAnalyzer().polarity_scores(text) for text in tiktoks['title_and_sound']]
+    add_dict = collections.Counter({'neg': 0.0, 'neu': 0.0, 'pos': 0.0, 'compound': 0.0})
+    # add up all the sentiment scores of all the tiktoks
+    for s in ss:
+        counter = collections.Counter(s)
+        add_dict += counter
+    dict_ss = dict(add_dict)
+    # take the average score
+    for k in dict_ss.keys():
+        dict_ss[k] = dict_ss[k]/len(ss)
+
+    return dict_ss
+
+def make_piechart(tiktoks):
+    # get date range
+    start = tiktoks['date'].min().strftime('%m/%d/%Y')
+    end = tiktoks['date'].max().strftime('%m/%d/%Y')
+
+    dict_data = sent_scores(tiktoks).copy()
+    dict_data.pop('compound')
+    df_data = pd.DataFrame([{'sentiment': x, 'score': y} for x,y in dict_data.items()])
+    fig = px.pie(df_data, 
+                 names='sentiment', 
+                 values='score', 
+                 title = f'''Sentiment Analysis on Trending TikToks
+                     <br> <sup> TikToks from {start} - {end}</sup>''', 
+                 template = 'plotly_dark', 
+                 color_discrete_sequence = ['rgb(255,255,255)', 'rgb(0,242,234)', 'rgb(255,0,80)'],
+                 width = 800,
+                 height = 600)
+    return fig
+
 
 
 
