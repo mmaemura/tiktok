@@ -55,7 +55,7 @@ def plot_sentiments2(num_days):
     
     cmd = \
     f"""
-    SELECT id, video_title, upload_time, sound_transcribed, like, view
+    SELECT id, video_title, upload_time, sound_transcribed, like, view, date_pulled
     FROM tiktok 
     """ 
     tiktoks = pd.read_sql_query(cmd, g.tiktok_db)
@@ -65,6 +65,7 @@ def plot_sentiments2(num_days):
 
     # clean df
     tiktoks = clean_tiktok_df(tiktoks)
+    tiktoks = tiktoks[tiktoks['date'] <= num_days]
 
     # get sentiments
     tiktoks = get_sentiment(tiktoks)
@@ -84,15 +85,16 @@ def submit():
     if request.method == 'GET':
         return render_template('submit.html')
     else:
-        num_days=request.form['num_days']
-        fig = plot_sentiments2(num_days)
-        graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-        return render_template('view2.html', thanks=True, graphJSON=graphJSON)
+        num_days = request.form['num_days']
+        num_days = int(num_days)
+        fig1 = plot_sentiments2(num_days)
+        graphJSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+        return render_template('view2.html', graphJSON=graphJSON)
 
-@app.route('/view/')
+@app.route('/view2/')
 def view2():
-    fig = plot_sentiments2(10)
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    #fig = plot_sentiments2(10)
+    #graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('view2.html', graphJSON=graphJSON)
 
 @app.route('/about_us/')

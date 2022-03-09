@@ -48,6 +48,11 @@ def clean_tiktok_df(tiktoks):
     tiktoks['original_video_title'] = tiktoks['video_title'] #keep original title in new column
     tiktoks['video_title'] = [re.sub("#[A-Za-z0-9_]+","", x) for x in tiktoks['video_title']] #remove hashtagged phrases from title
     tiktoks['video_title'] = tiktoks['video_title'] + tiktoks['predicted_hashtag_words'] #new title where hashtag phrases are replaced with their predicted words
+
+    #rank tiktoks in order of date pulled
+    tiktoks['date_pulled'] = pd.to_datetime(tiktoks.date_pulled)
+    tiktoks['date'] = tiktoks['date_pulled'].dt.strftime('%d').astype(int)
+    tiktoks['date'] = tiktoks['date'].rank(method='dense')
     
     return tiktoks
 
