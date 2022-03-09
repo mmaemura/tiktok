@@ -51,8 +51,8 @@ def clean_tiktok_df(tiktoks):
 
     #rank tiktoks in order of date pulled
     tiktoks['date_pulled'] = pd.to_datetime(tiktoks.date_pulled)
-    tiktoks['date'] = tiktoks['date_pulled'].dt.strftime('%d').astype(int)
-    tiktoks['date'] = tiktoks['date'].rank(method='dense')
+    tiktoks['date'] = tiktoks['date_pulled'].dt.date
+    tiktoks['rank'] = tiktoks['date'].rank(method='dense')
     
     return tiktoks
 
@@ -70,6 +70,9 @@ def get_sentiment(tiktoks):
 
 
 def plotsentiments2(tiktoks): 
+    start = tiktoks['date'].min().strftime('%m/%d/%Y')
+    end = tiktoks['date'].max().strftime('%m/%d/%Y')
+
     fig = px.scatter(tiktoks,
                      x = 'Positive Sentiment',
                      y = 'Negative Sentiment',
@@ -80,8 +83,8 @@ def plotsentiments2(tiktoks):
                      hover_name = 'original_video_title',
                      hover_data = ['Neutral Sentiment', 'Compound Sentiment', 'like', 'sound_transcribed'],
                      size = 'like',
-                     title = '''Sentiment Analysis on Trending TikToks
-                     <br> <sup> TikToks from 2/5/22 - 2/19/22</sup>''',
+                     title = f'''Sentiment Analysis on Trending TikToks
+                     <br> <sup> TikToks from {start} - {end}</sup>''',
                      size_max = 8,
                      width = 800,
                      height = 600)

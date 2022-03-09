@@ -65,7 +65,7 @@ def plot_sentiments2(num_days):
 
     # clean df
     tiktoks = clean_tiktok_df(tiktoks)
-    tiktoks = tiktoks[tiktoks['date'] <= num_days]
+    tiktoks = tiktoks[tiktoks['rank'] <= num_days]
 
     # get sentiments
     tiktoks = get_sentiment(tiktoks)
@@ -85,8 +85,11 @@ def submit():
     if request.method == 'GET':
         return render_template('submit.html')
     else:
+        # get num_days
         num_days = request.form['num_days']
         num_days = int(num_days)
+
+        # scatter plot
         fig1 = plot_sentiments2(num_days)
         graphJSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
         return render_template('view2.html', graphJSON=graphJSON)
