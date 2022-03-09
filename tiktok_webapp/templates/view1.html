@@ -2,21 +2,19 @@
 
 {% block header %}
   <h1>{% block title %}♫ Viewing Trending TikTok Sentiments ♪{% endblock %}</h1>
-
 {% endblock %}
 {% block content %}
-
 <body>
   <h1></h1>
   <div id='chart' class='chart'”></div>
 </body>
-
 <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 <script type='text/javascript'>
   var graphs = {{graphJSON | safe}};
   Plotly.plot('chart',graphs,{});
 </script>
 <br>
-
+<br>
+<b>Want to see more? <a href="{{ url_for('submit2') }}">Click here!</a></b>
 {% endblock %}
 

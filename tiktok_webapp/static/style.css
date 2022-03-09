@@ -17,8 +17,8 @@ h1 {
 }
 
 a {
-    color: white
-    text-decoration: none;
+    color: rgb(231, 64, 92);
+
 }
 
 hr {
@@ -40,6 +40,7 @@ nav ul  {
     margin: 0;
     padding: 0;
     text-align: center;
+    color: white;
 }
 
 nav ul li a {
