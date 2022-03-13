@@ -19,9 +19,14 @@ h2,
 h3,
 h4,
 h5,
+label {
+    color: rgb(12, 201, 201);
+}
 h6,
 label {
     color: rgb(12, 201, 201);
+    margin-left: 38px;
+    font-size: 20px;
 }
 
 
@@ -215,7 +220,8 @@ a.pure-button-primary {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin: 2em 0 1em;
+    margin: 2em 3 1em;
+    /*margin: 2em 0 1em;*/
 }
 
 
@@ -251,6 +257,10 @@ a.pure-button-primary {
     margin-left: auto;
     margin-right: auto;
   }
+
+a {
+    color: rgb(12, 201, 201);
+}
 
 
 

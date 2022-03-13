@@ -1,7 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -58,10 +54,14 @@ def clean_tiktok_df(tiktoks):
 
 
 def get_sentiment(tiktoks):
+
+    # get sentiment analyzer
     sid = SentimentIntensityAnalyzer()
+
     #combine title and sound_transcribed
     tiktoks['title_and_sound'] = tiktoks['video_title'].astype(str) + ' ' + tiktoks['sound_transcribed'].astype(str)
 
+    # get each score
     tiktoks['Negative Sentiment'] = tiktoks['title_and_sound'].apply(lambda x: sid.polarity_scores(x)['neg'])
     tiktoks['Neutral Sentiment'] = tiktoks['title_and_sound'].apply(lambda x: sid.polarity_scores(x)['neu'])
     tiktoks['Positive Sentiment'] = tiktoks['title_and_sound'].apply(lambda x: sid.polarity_scores(x)['pos'])
@@ -70,9 +70,11 @@ def get_sentiment(tiktoks):
 
 
 def plotsentiments2(tiktoks): 
+    #get start and end date
     start = tiktoks['date'].min().strftime('%m/%d/%Y')
     end = tiktoks['date'].max().strftime('%m/%d/%Y')
-
+    
+    # plot data
     fig = px.scatter(tiktoks,
                      x = 'Positive Sentiment',
                      y = 'Negative Sentiment',
@@ -88,8 +90,7 @@ def plotsentiments2(tiktoks):
                      size_max = 8,
                      width = 800,
                      height = 600)
-    # fig.update_xaxes(range=[-0.1,1.1])
-    # fig.update_yaxes(range=[-0.1,1.1])
+                     
     fig.update_traces(marker_sizemin = 3)
 
     fig.update_layout(

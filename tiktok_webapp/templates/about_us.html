@@ -1,52 +1,30 @@
-<!doctype html>
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
-<link rel="stylesheet" href="{{ url_for('static', filename='styletest.css') }}">
-
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A layout example that shows off a responsive product landing page.">
-    <title>Landing Page &ndash; Layout Examples &ndash; Pure</title>
-    <link rel="stylesheet" href="/css/pure/pure-min.css">
-    <link rel="stylesheet" href="/css/pure/grids-responsive-min.css">
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-    <link rel="stylesheet" href="/layouts/marketing/styles.css">
-</head>
-<body>
-
-<div class="header">
-    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">   
-        <a class="pure-menu-heading" href="">TikTok Webapp</a>     
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item"><a href="{{ url_for('main') }}" class="pure-menu-link">Home</a></li>
-            <li class="pure-menu-item"><a href="{{ url_for('about_us') }}" class="pure-menu-link">About Us</a></li>
-            <li class="pure-menu-item"><a href="{{ url_for('what') }}" class="pure-menu-link">What is Sentiment Analysis?</a></li>
-
-        </ul>
-    </div>
-</div>
-
+{% extends 'base.html' %}
+{% block body %}
 <div class="splash-container">
 
   <div class="pure-g">
     <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-  <br>
-  <h1 class="content-head is-center">♫ About Us ♪</h1>
-  <section class="splash-content">
-    <img width="300" alt="File Icons" class="center" src="/static/Kelly.png">
-    <h3 class="content-head is-center">Kelly Chen</h3>
-    <p>Kelly is a fourth year Math/Econ major at UCLA and has been an avid TikTok user since March 2020. She enjoys creating visualizations in Python and making meaningful observations with large datasets. Her favorite TikToks at the moment consist of ASMR cooking videos and European summer vlogs. </p>
-    <br>
-    <img width="300" alt="File Icons" class="center" src="/static/Emma.png">
-    <h3 class="content-head is-center">Emma Bradley</h3>
-    <p>Emma is a third year Applied Math major with a Specialization in Computing at UCLA. In her free time she enjoys hanging out with her 2 cats, obsessing over the New York Times daily mini, and trying iced vanilla lattes made with oat milk at new coffee shops. Her TikTok algorithm currently consists of baby animals, thrift hauls, and Robert Pattinson thirst traps. </p>
-    <br>
-    <h3 class="content-head is-center">Matthew Maemura</h3>
-  </section>
+      <br>
+      <h1 class="content-head is-center">♫ About Us ♪</h1>
+      <section class="splash-content">
 
-</section>
-</div>
-</div>
-</div>
+        <img width="300" alt="File Icons" class="center" src="/static/Kelly.png">
+        <h3 class="content-head is-center">Kelly Chen</h3>
+        <p>Kelly is a fourth year Math/Econ major at UCLA and has been an avid TikTok user since March 2020. She enjoys creating visualizations in Python and making meaningful observations with large datasets. Her favorite TikToks at the moment consist of ASMR cooking videos and European summer vlogs. </p>
+        <br>
 
+        <img width="300" alt="File Icons" class="center" src="/static/Emma.png">
+        <h3 class="content-head is-center">Emma Bradley</h3>
+        <p>Emma is a third year Applied Math major with a Specialization in Computing at UCLA. In her free time she enjoys hanging out with her 2 cats, obsessing over the New York Times daily mini, and trying iced vanilla lattes made with oat milk at new coffee shops. Her TikTok algorithm currently consists of baby animals, thrift hauls, and Robert Pattinson thirst traps. </p>
+        <br>
+
+        <img width="300" alt="File Icons" class="center" src="/static/matthew.png">
+        <h3 class="content-head is-center">Matthew Maemura</h3>
+        <p>Matthew is a fourth year Applied Math major with a Specialization in Computing and minor in Statistics. He likes to play video games, especially strategy and virtual reality games. Though he sets a 12 minute limit on TikTok, he manages to spend hours on wordletok and cartok (the movie, not actual cars). </p>
+        <br>
+        
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}
