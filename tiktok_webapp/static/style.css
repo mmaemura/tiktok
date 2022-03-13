@@ -16,6 +16,13 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    color: white;
+    font-family: Trebuchet;
+    margin: 1rem 0;
+    text-align: center;
+}
+
 a {
     color: rgb(231, 64, 92);
 
@@ -46,7 +53,7 @@ nav ul  {
 nav ul li a {
     display: block;
     padding: 0.5rem;
-    text-align: center;
+    text-align: right;
     color: white;
     
 }
@@ -75,3 +82,12 @@ nav ul li a {
     border: 1px solid #377ba8;
 
 }
+
+.blurb {
+    padding: 0 1rem 1rem;
+    background: rgb(12, 201, 201);
+    color: white;
+    border-radius: 25px;
+    text-align: left;
+}
+

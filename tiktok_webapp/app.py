@@ -30,8 +30,11 @@ from plotly import express as px
 
 from flask import Flask, render_template, request, g
 
+
 import numpy as np
 import re
+from flask import Flask, render_template
+
 
 import wordsegment
 from wordsegment import load, segment
@@ -43,7 +46,13 @@ from tiktok_functions import plotsentiments2, clean_tiktok_df, get_sentiment, ma
 
 
 app = Flask(__name__)
-
+#nav = Navigation(app)
+'''
+nav.Bar('top', [
+    nav.Item('Home', 'index'),
+    nav.Item('Latest News', 'news', {'page': 1}),
+])
+'''
 def get_tiktok_db():
     g.tiktok_db = sqlite3.connect("tiktok.db")
     return g.tiktok_db
@@ -103,7 +112,8 @@ def app_piechart(num_days):
 
 @app.route("/")
 def main():
-    return render_template('base.html')
+    #return render_template('base.html')
+    return render_template('test.html')
     
 @app.route('/submit1/', methods=['GET', 'POST'])
 def submit1():
@@ -114,9 +124,17 @@ def submit1():
         num_days = request.form['num_days']
         num_days = int(num_days)
 
+        # get plot type
+        plot = request.form['plot']
+
         # scatter plot
-        fig1 = plot_sentiments2(num_days)
-        graphJSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+        if plot == 'scatter':
+            fig = plot_sentiments2(num_days)
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+        else: 
+            fig = app_piechart(num_days)
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
         return render_template('view1.html', graphJSON=graphJSON)
 

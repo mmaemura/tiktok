@@ -1,19 +1,17 @@
 <!doctype html>
-
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %} - TikTok Webapp</title>
-<nav>
-  <h1>Check Sentiments of Trending TikToks!</h1>
-  <!-- <b>Navigation:</b> -->
-  <ul>
-    <li><a href="{{ url_for('main') }}">Home</a></li>
-    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-    <li><a href="{{ url_for('what') }}">What is Sentiment Analysis?</a></li>
-  </ul>
-  <br>
-  <br>
+
+      <h1>Check Sentiments of Trending TikToks!</h1>
+      <strong><nav>
+        <ul class="menu">
+          <li><a href="{{ url_for('main') }}">Home</a></li>
+          <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+          <li><a href="{{ url_for('what') }}">What is Sentiment Analysis?</a></li>
+        </ul>
+      </nav></strong>
   
-</nav>
 
 <section class="content">
   <header>
@@ -21,7 +19,7 @@
   </header>
   {% block content %}
   <br>
-  <h1>Click below to query current trending TikToks and analyze their sentiments</h1>
+  <h1>Click below to analyze the sentiments of trending TikToks!</h1>
   <ul>
     <a href="{{ url_for('submit1') }}">Let's get started!</a>
   </ul>

@@ -2,21 +2,24 @@
 <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
 
 
-<nav>
-  <h1>Check Sentiments of Trending TikToks!</h1>
-  <!-- <b>Navigation:</b> -->
-  <ul>
-    <li><a href="{{ url_for('main') }}">Home</a></li>
-    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-  </ul>
-  <br>
-  <br>
-  
-</nav>
+<div class="container">
+  <h1 class="logo">Check Sentiments of Trending TikToks!</h1>
+  <strong><nav>
+    <ul class="menu">
+      <li><a href="{{ url_for('main') }}">Home</a></li>
+      <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+      <li><a href="{{ url_for('what') }}">What is Sentiment Analysis?</a></li>
+    </ul>
+  </nav></strong>
+</div>
 
 <section class="content">
 {% block header %}
   <h1>{% block title %}♫ About Us ♪{% endblock %}</h1>
+  <section class="blurbs">
+    Kelly is a fourth year Math/Econ major at UCLA and has been an avid TikTok user since March 2020. She enjoys creating visualizations in Python and making meaningful observations with large datasets. Her favorite TikToks at the moment consist of ASMR cooking videos and European summer vlogs. 
+  </section>
+
 {% endblock %}
 </section>
 
