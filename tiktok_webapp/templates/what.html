@@ -1,20 +1,42 @@
-<!DOCTYPE html>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+<!doctype html>
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='styletest.css') }}">
 
-<div class="container">
-  <h1 class="logo">Check Sentiments of Trending TikToks!</h1>
-  <strong><nav>
-    <ul class="menu">
-      <li><a href="{{ url_for('main') }}">Home</a></li>
-      <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-      <li><a href="{{ url_for('what') }}">What is Sentiment Analysis?</a></li>
-    </ul>
-  </nav></strong>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A layout example that shows off a responsive product landing page.">
+    <title>Landing Page &ndash; Layout Examples &ndash; Pure</title>
+    <link rel="stylesheet" href="/css/pure/pure-min.css">
+    <link rel="stylesheet" href="/css/pure/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="/layouts/marketing/styles.css">
+</head>
+<body>
+
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">   
+        <a class="pure-menu-heading" href="">TikTok Webapp </a>     
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item"><a href="{{ url_for('main') }}" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('about_us') }}" class="pure-menu-link">About Us</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('what') }}" class="pure-menu-link">What is Sentiment Analysis?</a></li>
+
+        </ul>
+    </div>
 </div>
 
-<section class="content">
-{% block header %}
-  <h1>{% block title %}♫ What is Sentiment Analysis? ♪{% endblock %}</h1>
-{% endblock %}
-</section>
+<div class="splash-container">
+
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+  <br>
+  <h2 class="content-head is-center">♫ What is Sentiment Analysis? ♪</h2>
+
+</div>
+</div>
+</div>
+
+
 

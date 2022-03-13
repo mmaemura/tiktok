@@ -135,7 +135,7 @@ def submit1():
         else: 
             fig = app_piechart(num_days)
             graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
+            
         return render_template('view1.html', graphJSON=graphJSON)
 
 @app.route('/submit2/', methods=['GET', 'POST'])

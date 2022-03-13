@@ -16,14 +16,13 @@
 <body>
 
 <div class="header">
-    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <iframe src="https://giphy.com/embed/U3rive8V39QioDjmNF" width="30" height="30" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><a class="pure-menu-heading" href="">TikTok Webapp</a>
-        
-
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">   
+        <a class="pure-menu-heading" href="">TikTok Webapp</a>     
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="{{ url_for('main') }}" class="pure-menu-link">Home</a></li>
+            <li class="pure-menu-item"><a href="{{ url_for('main') }}" class="pure-menu-link">Home</a></li>
             <li class="pure-menu-item"><a href="{{ url_for('about_us') }}" class="pure-menu-link">About Us</a></li>
             <li class="pure-menu-item"><a href="{{ url_for('what') }}" class="pure-menu-link">What is Sentiment Analysis?</a></li>
+
         </ul>
     </div>
 </div>
@@ -39,4 +38,5 @@
         </p>
     </div>
 </div>
+
 
