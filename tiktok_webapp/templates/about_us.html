@@ -1,22 +1,30 @@
-<!DOCTYPE html>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+{% extends 'base.html' %}
+{% block body %}
+<div class="splash-container">
 
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+      <br>
+      <h1 class="content-head is-center">♫ About Us ♪</h1>
+      <section class="splash-content">
 
-<nav>
-  <h1>Check Sentiments of Trending TikToks!</h1>
-  <!-- <b>Navigation:</b> -->
-  <ul>
-    <li><a href="{{ url_for('main') }}">Home</a></li>
-    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-  </ul>
-  <br>
-  <br>
-  
-</nav>
+        <img width="300" alt="File Icons" class="center" src="/static/Kelly.png">
+        <h3 class="content-head is-center">Kelly Chen</h3>
+        <p>Kelly is a fourth year Math/Econ major at UCLA and has been an avid TikTok user since March 2020. She enjoys creating visualizations in Python and making meaningful observations with large datasets. Her favorite TikToks at the moment consist of ASMR cooking videos and European summer vlogs. </p>
+        <br>
 
-<section class="content">
-{% block header %}
-  <h1>{% block title %}♫ About Us ♪{% endblock %}</h1>
+        <img width="300" alt="File Icons" class="center" src="/static/Emma.png">
+        <h3 class="content-head is-center">Emma Bradley</h3>
+        <p>Emma is a third year Applied Math major with a Specialization in Computing at UCLA. In her free time she enjoys hanging out with her 2 cats, obsessing over the New York Times daily mini, and trying iced vanilla lattes made with oat milk at new coffee shops. Her TikTok algorithm currently consists of baby animals, thrift hauls, and Robert Pattinson thirst traps. </p>
+        <br>
+
+        <img width="300" alt="File Icons" class="center" src="/static/matthew.png">
+        <h3 class="content-head is-center">Matthew Maemura</h3>
+        <p>Matthew is a fourth year Applied Math major with a Specialization in Computing and minor in Statistics. He likes to play video games, especially strategy and virtual reality games. Though he sets a 12 minute limit on TikTok, he manages to spend hours on wordletok and cartok (the movie, not actual cars). </p>
+        <br>
+        
+      </section>
+    </div>
+  </div>
+</div>
 {% endblock %}
-</section>
-

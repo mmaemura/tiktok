@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="splash-container">
+    <div class="splash">
+        <h1 class="splash-head">TikTok Sentiments</h1>
+        <p class="splash-subhead">
+            Click below to analyze the sentiments of trending TikToks
+        </p>
+        <p>
+            <a href="{{ url_for('submit1') }}" class="pure-button pure-button-primary">Get Started</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

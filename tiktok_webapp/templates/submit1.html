@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="splash-container">
+
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+      <br>
+        <form class="pure-form pure-form-stacked" method='POST'>
+            <fieldset>
+              <label for="plot">Choose a visualization: </label>
+              <SELECT name="plot">
+                <OPTION value="scatter">scatterplot</option>
+                <OPTION value="pie">pie chart</option>
+              </SELECT>
+
+
+              <label for="num_days">How many days worth of trending TikToks would you like to analyze?</label>
+              <input type="text" name="num_days" id="num_days">
+
+
+              <button type="submit" name="action1" class="pure-button">Go Now!</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

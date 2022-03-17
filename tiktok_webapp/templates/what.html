@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+{% extends 'base.html' %}
+{% block body %}
 
-
-<nav>
-  <h1>Check Sentiments of Trending TikToks!</h1>
-  <!-- <b>Navigation:</b> -->
-  <ul>
-    <li><a href="{{ url_for('main') }}">Home</a></li>
-    <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-    <li><a href="{{ url_for('what') }}">What is Sentiment Analysis?</a></li>
-  </ul>
-  <br>
-  <br>
-  
-</nav>
-
-<section class="content">
-{% block header %}
-  <h1>{% block title %}♫ What is Sentiment Analysis? ♪{% endblock %}</h1>
+<div class="splash-container">
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+      <br>
+      <h2 class="content-head is-center">♫ What is Sentiment Analysis? ♪</h2>
+    </div>
+  </div>
+</div>
 {% endblock %}
-</section>
+
+
 

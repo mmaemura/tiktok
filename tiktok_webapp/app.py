@@ -30,8 +30,11 @@ from plotly import express as px
 
 from flask import Flask, render_template, request, g
 
+
 import numpy as np
 import re
+from flask import Flask, render_template
+
 
 import wordsegment
 from wordsegment import load, segment
@@ -39,14 +42,19 @@ load()
 import nltk
 nltk.download('vader_lexicon')
 
-from tiktok_functions import plotsentiments2, clean_tiktok_df, get_sentiment
+from tiktok_functions import plotsentiments2, clean_tiktok_df, get_sentiment, make_piechart
 
 
 app = Flask(__name__)
-
+#nav = Navigation(app)
+'''
+nav.Bar('top', [
+    nav.Item('Home', 'index'),
+    nav.Item('Latest News', 'news', {'page': 1}),
+])
+'''
 def get_tiktok_db():
-    if 'tiktok_db' not in g:
-        g.tiktok_db = sqlite3.connect("tiktok.db")
+    g.tiktok_db = sqlite3.connect("tiktok.db")
     return g.tiktok_db
 
 def plot_sentiments2(num_days):
@@ -65,7 +73,7 @@ def plot_sentiments2(num_days):
 
     # clean df
     tiktoks = clean_tiktok_df(tiktoks)
-    tiktoks = tiktoks[tiktoks['date'] <= num_days]
+    tiktoks = tiktoks[tiktoks['rank'] <= num_days]
 
     # get sentiments
     tiktoks = get_sentiment(tiktoks)
@@ -75,27 +83,89 @@ def plot_sentiments2(num_days):
 
     return fig
 
+def app_piechart(num_days):
+    #connect to database
+    g.tiktok_db = get_tiktok_db()
+    
+    cmd = \
+    f"""
+    SELECT id, video_title, upload_time, sound_transcribed, like, view, date_pulled
+    FROM tiktok 
+    """ 
+    tiktoks = pd.read_sql_query(cmd, g.tiktok_db)
+
+    # close database
+    g.tiktok_db.close()
+
+    # clean df
+    tiktoks = clean_tiktok_df(tiktoks)
+    tiktoks = tiktoks[tiktoks['rank'] <= num_days]
+
+    # get sentiments
+    tiktoks = get_sentiment(tiktoks)
+
+    # plot sentiments
+    fig = make_piechart(tiktoks)
+
+    return fig
+
 
 @app.route("/")
 def main():
-    return render_template('base.html')
+    #return render_template('base.html')
+    return render_template('test.html')
     
-@app.route('/submit/', methods=['GET', 'POST'])
-def submit():
+@app.route('/submit1/', methods=['GET', 'POST'])
+def submit1():
     if request.method == 'GET':
-        return render_template('submit.html')
+        return render_template('submit1.html')
     else:
+        # get num_days
         num_days = request.form['num_days']
         num_days = int(num_days)
-        fig1 = plot_sentiments2(num_days)
-        graphJSON = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+
+        # get plot type
+        plot = request.form['plot']
+
+        # scatter plot
+        if plot == 'scatter':
+            fig = plot_sentiments2(num_days)
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+        else: 
+            fig = app_piechart(num_days)
+            graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+            
+        return render_template('view1.html', graphJSON=graphJSON)
+
+@app.route('/submit2/', methods=['GET', 'POST'])
+def submit2():
+    if request.method == 'GET':
+        return render_template('submit2.html')
+    else:
+        # get num_days
+        num_days = request.form['num_days']
+        num_days = int(num_days)
+
+        # pie chart
+        fig2 = app_piechart(num_days)
+        graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
         return render_template('view2.html', graphJSON=graphJSON)
+
+@app.route('/view1/')
+def view1():
+    return render_template('view1.html', graphJSON=graphJSON)
 
 @app.route('/view2/')
 def view2():
-    #fig = plot_sentiments2(10)
-    #graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    # get num_days
+    #num_days = g.x
+
+    fig2 = app_piechart(10)
+    graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+
     return render_template('view2.html', graphJSON=graphJSON)
+
 
 @app.route('/about_us/')
 def about_us():

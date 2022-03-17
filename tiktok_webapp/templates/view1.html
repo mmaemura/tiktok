@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="splash-container">
+
+  <div class="pure-g">
+    <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+      <br>
+      <body>
+        <h1></h1>
+        <div id='chart' class='chart'”></div>
+      </body>
+      <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+      <script type='text/javascript'>
+        var graphs = {{graphJSON | safe}};
+        Plotly.plot('chart',graphs,{});
+      </script>
+    </div>
+</div>
+    <h6 class="content-head"> 
+      Want to see more? <a href="{{ url_for('submit1') }}">Click here!</a>
+    </h6>
+</div>
+{% endblock %}
+
+
+
