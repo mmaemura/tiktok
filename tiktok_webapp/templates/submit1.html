@@ -17,8 +17,11 @@
               <label for="num_days">How many days worth of trending TikToks would you like to analyze?</label>
               <input type="text" name="num_days" id="num_days">
 
+              {% if errornum %}
+              <p>Whoops! Please enter a number less than 14<p>
+              {% endif %}
               {% if error %}
-              <p>Whoops! Please enter a number less than 16<p>
+              <p>Whoops! Please enter a number<p>
               {% endif %}
 
 

@@ -136,9 +136,14 @@ def submit1():
     else:
         # get num_days
         num_days = request.form['num_days']
-        num_days = int(num_days)
+        try: 
+            num_days = int(num_days)
 
-        if num_days > 13:
+            if num_days > 13:
+                return render_template('submit1.html', errornum=True)
+            
+
+        except: 
             return render_template('submit1.html', error=True)
     
 
