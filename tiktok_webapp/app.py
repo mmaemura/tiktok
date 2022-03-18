@@ -42,22 +42,25 @@ load()
 import nltk
 nltk.download('vader_lexicon')
 
-from tiktok_functions import plotsentiments2, clean_tiktok_df, get_sentiment, make_piechart
+from tiktok_functions import make_scatterplot, clean_tiktok_df, get_sentiment, make_piechart
 
 
 app = Flask(__name__)
-#nav = Navigation(app)
-'''
-nav.Bar('top', [
-    nav.Item('Home', 'index'),
-    nav.Item('Latest News', 'news', {'page': 1}),
-])
-'''
+
 def get_tiktok_db():
+    ''' 
+    A function that accesses the tiktok database through the Flask web app
+    '''
+    # connect to db
     g.tiktok_db = sqlite3.connect("tiktok.db")
+
+    # return connection
     return g.tiktok_db
 
-def plot_sentiments2(num_days):
+def app_scatterplot(num_days):
+    ''' 
+    A function that passes a scatter plot of the sentiment analysis scores to the view.html template
+    '''
     #connect to database
     g.tiktok_db = get_tiktok_db()
     
@@ -79,11 +82,14 @@ def plot_sentiments2(num_days):
     tiktoks = get_sentiment(tiktoks)
 
     # plot sentiments
-    fig = plotsentiments2(tiktoks)
+    fig = make_scatterplot(tiktoks)
 
     return fig
 
 def app_piechart(num_days):
+    ''' 
+    A function that passes a pie chart of the sentiment analysis scores to the view.html template
+    '''
     #connect to database
     g.tiktok_db = get_tiktok_db()
     
@@ -112,11 +118,19 @@ def app_piechart(num_days):
 
 @app.route("/")
 def main():
-    #return render_template('base.html')
+    '''
+    The app route that is called when the web app is first initialized
+    '''
     return render_template('test.html')
     
 @app.route('/submit1/', methods=['GET', 'POST'])
 def submit1():
+    '''
+    The app route that is called when the user wants to view the sentiments
+    of trending TikToks. Allows the user to specify the format the data is
+    displayed in.
+    '''
+
     if request.method == 'GET':
         return render_template('submit1.html')
     else:
@@ -124,55 +138,45 @@ def submit1():
         num_days = request.form['num_days']
         num_days = int(num_days)
 
+        if num_days > 13:
+            return render_template('submit1.html', error=True)
+    
+
         # get plot type
         plot = request.form['plot']
 
         # scatter plot
         if plot == 'scatter':
-            fig = plot_sentiments2(num_days)
+            fig = app_scatterplot(num_days)
             graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
+        # pie chart
         else: 
             fig = app_piechart(num_days)
             graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
             
         return render_template('view1.html', graphJSON=graphJSON)
 
-@app.route('/submit2/', methods=['GET', 'POST'])
-def submit2():
-    if request.method == 'GET':
-        return render_template('submit2.html')
-    else:
-        # get num_days
-        num_days = request.form['num_days']
-        num_days = int(num_days)
-
-        # pie chart
-        fig2 = app_piechart(num_days)
-        graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-        return render_template('view2.html', graphJSON=graphJSON)
 
 @app.route('/view1/')
 def view1():
+    '''
+    The app route that is called so that the user can view the plot of sentiment scores.
+    '''
     return render_template('view1.html', graphJSON=graphJSON)
-
-@app.route('/view2/')
-def view2():
-    # get num_days
-    #num_days = g.x
-
-    fig2 = app_piechart(10)
-    graphJSON = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-
-    return render_template('view2.html', graphJSON=graphJSON)
-
 
 @app.route('/about_us/')
 def about_us():
+    '''
+    The app route that is called when the user clicks on the 'About Us' tab of the web app
+    '''
     return render_template('about_us.html')
 
 @app.route('/what/')
 def what():
+    '''
+    The app route that is called when the user clicks on the 'Our Goal' tab of the web app
+    '''
     return render_template('what.html')
     
 

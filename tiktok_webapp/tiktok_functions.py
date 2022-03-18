@@ -21,6 +21,9 @@ from nltk.sentiment import SentimentAnalyzer
 from nltk.sentiment.util import *
 
 def clean_tiktok_df(tiktoks):
+    '''
+    A function for cleaning the raw dataframe of TikToks obtained from the unofficial TikTok API.
+    '''
     
     #fix column 'upload_time' -> 'video_url'
     tiktoks = tiktoks.rename(columns = {'upload_time' : 'video_url'})
@@ -54,6 +57,9 @@ def clean_tiktok_df(tiktoks):
 
 
 def get_sentiment(tiktoks):
+    '''
+    A function that adds the sentiment analysis scores into columns in the TikTok dataframe
+    '''
 
     # get sentiment analyzer
     sid = SentimentIntensityAnalyzer()
@@ -69,7 +75,10 @@ def get_sentiment(tiktoks):
     return tiktoks
 
 
-def plotsentiments2(tiktoks): 
+def make_scatterplot(tiktoks): 
+    """
+    Takes in a dataframe and returns a scatterplot of the sentiment analysis
+    """
     #get start and end date
     start = tiktoks['date'].min().strftime('%m/%d/%Y')
     end = tiktoks['date'].max().strftime('%m/%d/%Y')
@@ -103,13 +112,19 @@ def plotsentiments2(tiktoks):
     return fig
 
 def sent_scores(tiktoks):
+    """
+    Takes in a dataframe, calculates the sentiment scores, 
+    Returns a dictionary containing the average sentiment score
+    """
     ss = [SentimentIntensityAnalyzer().polarity_scores(text) for text in tiktoks['title_and_sound']]
     add_dict = collections.Counter({'neg': 0.0, 'neu': 0.0, 'pos': 0.0, 'compound': 0.0})
+   
     # add up all the sentiment scores of all the tiktoks
     for s in ss:
         counter = collections.Counter(s)
         add_dict += counter
     dict_ss = dict(add_dict)
+    
     # take the average score
     for k in dict_ss.keys():
         dict_ss[k] = dict_ss[k]/len(ss)
@@ -117,6 +132,9 @@ def sent_scores(tiktoks):
     return dict_ss
 
 def make_piechart(tiktoks):
+    """
+    Takes in a dataframe and returns a pie chart of the sentiment analysis
+    """
     # get date range
     start = tiktoks['date'].min().strftime('%m/%d/%Y')
     end = tiktoks['date'].max().strftime('%m/%d/%Y')
